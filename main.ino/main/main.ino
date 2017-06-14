@@ -2,7 +2,7 @@
 #include "taskOne.h"
 
 // define two tasks for Blink & AnalogRead
-void TaskBlink2( void *pvParameters );
+void TaskTwo( void *pvParameters );
 
 void TaskAnalogRead( void *pvParameters );
 
@@ -19,7 +19,7 @@ void setup() {
     ,  NULL );
 
   xTaskCreate(
-    TaskBlink2
+    TaskTwo
     ,  (const portCHAR *)"Blink"   // A name just for humans
     ,  128  // Stack size
     ,  NULL
@@ -46,7 +46,7 @@ void loop()
 /*---------------------- Tasks ---------------------*/
 /*--------------------------------------------------*/
 
-void TaskBlink2(void *pvParameters)  // This is a task.
+void TaskTwo(void *pvParameters)  // This is a task.
 {
   (void) pvParameters;
 
