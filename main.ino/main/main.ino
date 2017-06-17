@@ -1,8 +1,6 @@
 #include <Arduino_FreeRTOS.h>
-
-// define two tasks for Blink & AnalogRead
-void TaskBlink1( void *pvParameters );
-void TaskBlink2( void *pvParameters );
+#include "taskOne.h"
+#include "taskTwo.h"
 
 void TaskAnalogRead( void *pvParameters );
 
@@ -11,7 +9,7 @@ void setup() {
 
   // Now set up two tasks to run independently.
   xTaskCreate(
-    TaskBlink1
+    TaskOne
     ,  (const portCHAR *)"Blink"   // A name just for humans
     ,  128  // Stack size
     ,  NULL
@@ -19,7 +17,7 @@ void setup() {
     ,  NULL );
 
   xTaskCreate(
-    TaskBlink2
+    TaskTwo
     ,  (const portCHAR *)"Blink"   // A name just for humans
     ,  128  // Stack size
     ,  NULL
@@ -45,38 +43,6 @@ void loop()
 /*--------------------------------------------------*/
 /*---------------------- Tasks ---------------------*/
 /*--------------------------------------------------*/
-
-void TaskBlink1(void *pvParameters)  // This is a task.
-{
-  (void) pvParameters;
-
-  // initialize digital pin 13 as an output.
-  pinMode(13, OUTPUT);
-
-  for (;;) // A Task shall never return or exit.
-  {
-    digitalWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
-    vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
-    digitalWrite(13, LOW);    // turn the LED off by making the voltage LOW
-    vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
-  }
-}
-
-void TaskBlink2(void *pvParameters)  // This is a task.
-{
-  (void) pvParameters;
-
-  // initialize digital pin 13 as an output.
-  pinMode(12, OUTPUT);
-
-  for (;;) // A Task shall never return or exit.
-  {
-    digitalWrite(12, HIGH);   // turn the LED on (HIGH is the voltage level)
-    vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
-    digitalWrite(12, LOW);    // turn the LED off by making the voltage LOW
-    vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
-  }
-}
 
 void TaskAnalogRead(void *pvParameters)  // This is a task.
 {
