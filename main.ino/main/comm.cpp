@@ -3,6 +3,8 @@
 #include "mcp_can.h"
 
 #include "comm.h"
+#include "tE.h"
+
 // var to test the can bus 
 int noMessageRecievedCount = 0; // count will be increment whenever we do not receive message and reset when we receive one.
 const int MAXCOMMDOWNTIME = 10; // if above count did reach this constant controller should indicate fault.
@@ -59,6 +61,7 @@ void ReceiveMessage(void) {
  *  This method send an aggregated message from this end to other node/s 
  */
 void sendMessage(void) {
+  messageToSend[0] = apps;
   Serial.println("sending message");
   CAN.sendMsgBuf(Id,0, 8, messageToSend);
 }
