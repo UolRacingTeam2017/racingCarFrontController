@@ -34,23 +34,3 @@ void loop()
   // Empty. Things are done in Tasks.
 }
 
-/*--------------------------------------------------*/
-/*---------------------- Tasks ---------------------*/
-/*--------------------------------------------------*/
-
-void TaskAnalogRead(void *pvParameters)  // This is a task.
-{
-  (void) pvParameters;
-
-  // initialize serial communication at 9600 bits per second:
-  Serial.begin(9600);
-
-  for (;;)
-  {
-    // read the input on analog pin 0:
-    int sensorValue = analogRead(A0);
-    // print out the value you read:
-    Serial.println(sensorValue);
-    vTaskDelay(1);  // one tick delay (15ms) in between reads for stability
-  }
-}
