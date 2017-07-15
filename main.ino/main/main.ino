@@ -9,11 +9,11 @@ void TaskAnalogRead( void *pvParameters );
 void setup() {
    initCan();
 
-  // Now set up two tasks to run independently.
+//   Now set up two tasks to run independently.
   xTaskCreate(
-    torqueEncoder
-    ,  (const portCHAR *)"Blink"   // A name just for humans
-    ,  128  // Stack size
+    readPots
+    ,  (const portCHAR *) "AnalogRead"
+    ,  128 // This stack size can be checked & adjusted by reading Highwater
     ,  NULL
     ,  2  // priority
     ,  NULL );
@@ -23,15 +23,7 @@ void setup() {
     ,  (const portCHAR *)"Blink"   // A name just for humans
     ,  128  // Stack size
     ,  NULL
-    ,  2  // priority
-    ,  NULL );
-    
-  xTaskCreate(
-    TaskAnalogRead
-    ,  (const portCHAR *) "AnalogRead"
-    ,  128 // This stack size can be checked & adjusted by reading Highwater
-    ,  NULL
-    ,  1  // priority
+    ,  2// priority
     ,  NULL );
 
   // Now the task scheduler, which takes over control of scheduling individual tasks, is automatically started.
