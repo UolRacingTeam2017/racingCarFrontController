@@ -1,19 +1,28 @@
 #include <Arduino_FreeRTOS.h>
 #include "tE.h"
 
-void torqueEncoder(void *pvParameters)  // This is a task.
-{
+int apps = 0;
+int bse = 0;
+int apps1 = 0;
+int apps2 = 0;
+
+int apps1Pin = 0; 
+int apps2Pin = 1;
+int bsePin = 3;
+
+void readPots( void *pvParameters ){
   (void) pvParameters;
-
-  // initialize digital pin 13 as an output.
-  pinMode(7, OUTPUT);
-
-  for (;;) // A Task shall never return or exit.
-  {
-    digitalWrite(7, HIGH);   // turn the LED on (HIGH is the voltage level)
-    vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
-    digitalWrite(7, LOW);    // turn the LED off by making the voltage LOW
-    vTaskDelay( 1000 / portTICK_PERIOD_MS ); // wait for one second
+  for(;;) {
+    apps1 = analogRead(apps1Pin);
+    apps2 = analogRead(apps2Pin);
+    bse = analogRead(bsePin);
+    int diff = abs(apps1 -apps2);
+    if (diff > 25 ) {
+      apps = 0; 
+    } else {
+      apps = apps1;
+    }
   }
 }
+
 
