@@ -1,5 +1,5 @@
 #include <Arduino_FreeRTOS.h>
-#include "taskOne.h"
+#include "tE.h"
 #include "comm.h"
 
 
@@ -11,7 +11,7 @@ void setup() {
 
   // Now set up two tasks to run independently.
   xTaskCreate(
-    TaskOne
+    torqueEncoder
     ,  (const portCHAR *)"Blink"   // A name just for humans
     ,  128  // Stack size
     ,  NULL

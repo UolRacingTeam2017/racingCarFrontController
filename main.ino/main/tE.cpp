@@ -1,7 +1,7 @@
 #include <Arduino_FreeRTOS.h>
-#include "taskOne.h"
+#include "tE.h"
 
-void TaskOne(void *pvParameters)  // This is a task.
+void torqueEncoder(void *pvParameters)  // This is a task.
 {
   (void) pvParameters;
 
