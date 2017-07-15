@@ -1,11 +1,13 @@
 #include <Arduino_FreeRTOS.h>
 #include "taskOne.h"
-#include "taskTwo.h"
+#include "comm.h"
+
 
 void TaskAnalogRead( void *pvParameters );
 
 // the setup function runs once when you press reset or power the board
 void setup() {
+   initCan();
 
   // Now set up two tasks to run independently.
   xTaskCreate(
@@ -17,7 +19,7 @@ void setup() {
     ,  NULL );
 
   xTaskCreate(
-    TaskTwo
+    testCan
     ,  (const portCHAR *)"Blink"   // A name just for humans
     ,  128  // Stack size
     ,  NULL
