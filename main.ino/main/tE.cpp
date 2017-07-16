@@ -20,6 +20,7 @@ void readPots( void *pvParameters ){
     apps2 = analogRead(apps2Pin);
     bse = analogRead(bsePin);
     int diff = abs(apps1 -apps2);
+    
     if (TEFLAG) {
       delay(100);
     }
@@ -27,9 +28,9 @@ void readPots( void *pvParameters ){
       apps = 0; 
     } else if (diff > 25 && !TEFLAG) {
       TEFLAG = true; 
-      apps = apps1;
+      apps = map(apps1, 0, 1024, 0, 255);
     } else {
-      apps = apps1; 
+      apps = map(apps1, 0, 1024, 0, 255);
       TEFLAG = false;
     }
   }
