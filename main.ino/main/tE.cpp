@@ -24,9 +24,9 @@ void readPots( void *pvParameters ){
     if (TEFLAG) {
       delay(100);
     }
-    if (diff > 25 && TEFLAG) {
+    if (diff > 102 && TEFLAG) {
       apps = 0; 
-    } else if (diff > 25 && !TEFLAG) {
+    } else if (diff > 102 && !TEFLAG) {
       TEFLAG = true; 
       apps = map(apps1, 0, 1024, 0, 255);
     } else {
