@@ -12,15 +12,25 @@ int bsePin = 3;
 
 void readPots( void *pvParameters ){
   (void) pvParameters;
+  static bool TEFLAG;
+  TEFLAG = false;
+  
   for(;;) {
     apps1 = analogRead(apps1Pin);
     apps2 = analogRead(apps2Pin);
     bse = analogRead(bsePin);
     int diff = abs(apps1 -apps2);
-    if (diff > 25 ) {
+    if (TEFLAG) {
+      delay(100);
+    }
+    if (diff > 25 && TEFLAG) {
       apps = 0; 
-    } else {
+    } else if (diff > 25 && !TEFLAG) {
+      TEFLAG = true; 
       apps = apps1;
+    } else {
+      apps = apps1; 
+      TEFLAG = false;
     }
   }
 }
